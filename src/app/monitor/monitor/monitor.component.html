@@ -1,0 +1,83 @@
+<div class="d-flex g-main">
+  <div class="col">
+    <div class="d-flex flex-row  g-main px-2" style="overflow:hidden;">
+      <div class="col">
+        <div class="d-flex flex-column g-main">
+
+
+          <!--工具栏了 BEGIN-->
+          <div class="pt-2 mb-2">
+            <div class="row pt-2 mb-2">
+              <div class="col-sm-12 col-md-6 pt-2">
+                绑定器
+                <kendo-dropdownlist 
+                [data]="viewModel.bdqData.dataInfo"
+                [textField]="'BDQMC'"
+                [valueField]="'BDQNM'"
+                [(ngModel)]="viewModel.bdqData.selectedValue"
+                [valuePrimitive]="true"
+                >
+               </kendo-dropdownlist>
+               <button type="button" (click)="viewModel.view()" class="btn btn-sm btn-default">查看 </button>
+              <button type="button" (click)="viewModel.back()" class="btn btn-sm btn-default ">返回</button>
+              </div>
+            </div>
+          </div>
+          <!--工具栏了 END-->
+
+          <div class="flex-auto" style="overflow-y:auto;" id="attachmentParent">
+
+            <!--表体 BEGIN-->
+            <ng-container>
+              <kendo-tabstrip>
+                <kendo-tabstrip-tab [title]="'接收监控'" [selected]="true">
+                  <ng-template kendoTabContent>
+                    <div class="w-100" style="overflow-x:auto;">
+                        <kendo-grid [class]="'flex-auto'"
+                        [selectable]="true"
+                        [kendoGridSelectBy]="'GDNM'"
+                        [kendoGridBinding]="viewModel.bindingData.GD"
+                        [form]="viewModel.form.GDForm"
+                      >
+                        <kendo-grid-column field="GDMC" title="管道名称" width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="GDMS" title="管道描述" width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="FWDY"  title="服务单元"   width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="GNMK"  title="功能模块"   width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="LYXX"  title="路由信息"   width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="JSZGS"  title="接收总个数"   width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="JSCGGS"  title="接收成功个数"   width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="JSSBGS"  title="接收失败个数"   width="12.5%"></kendo-grid-column>
+                      </kendo-grid>
+                    </div>
+                  </ng-template>
+                </kendo-tabstrip-tab>
+                <kendo-tabstrip-tab [title]="'发送监控'">
+                  <ng-template kendoTabContent>
+
+                    <div class="w-100" style="overflow-x:auto;">
+                        <kendo-grid [class]="'flex-auto'"
+                        [selectable]="true"
+                        [kendoGridSelectBy]="'GDNM'"
+                        [kendoGridBinding]="viewModel.bindingData.GD"
+                        [form]="viewModel.form.GDForm"
+                      >
+                        <kendo-grid-column field="GDMC" title="管道名称" width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="GDMS" title="管道描述" width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="FSZGS"  title="发送总个数"   width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="FSCGGS"  title="发送成功个数"   width="12.5%"></kendo-grid-column>
+                        <kendo-grid-column field="FSSBGS"  title="发送失败个数"   width="12.5%"></kendo-grid-column>
+                      </kendo-grid>
+                    </div>
+                  </ng-template>
+                </kendo-tabstrip-tab>
+              </kendo-tabstrip>
+            </ng-container>
+            <!--表体 END-->
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

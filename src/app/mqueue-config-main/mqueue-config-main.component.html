@@ -1,0 +1,35 @@
+<div class="d-flex g-main flex-column">
+        <h1 class="h3 d-inline-block">消息队列配置管理</h1>
+    <div class="pt-2 mb-2 clearfix">
+      <div class="float-left pr-2">
+          <button class="btn btn-sm btn-default" (click)="viewModel.add()">新增</button>
+          <button  (click)="viewModel.remove()" class="btn btn-sm btn-default">删除</button>
+          <kendo-dialog title="确认删除" *ngIf="viewModel.uiState.openDialog" (close)="viewModel.cancel()" [minWidth]="250" [width]="450">
+              <p style="margin: 30px; text-align: center;">是否要删除共<span class="k-required"> {{viewModel.uiState.selectedIds.length}} </span>条数据？</p>
+              <kendo-dialog-actions>
+                  <button kendoButton (click)="viewModel.cancel()">否</button>
+                  <button kendoButton (click)="viewModel.confirm()" primary="true">是</button>
+              </kendo-dialog-actions>
+          </kendo-dialog>
+          <button class="btn btn-sm btn-default" (click)="viewModel.edit()">修改</button>
+          <button class="btn btn-sm btn-default" (click)="viewModel.on()">启用</button>
+          <button class="btn btn-sm btn-default" (click)="viewModel.off()">停用</button>
+          <button class="btn btn-sm btn-default" (click)="viewModel.monitor()">监控</button>
+      </div>
+    </div>
+
+
+  <div class="kendo-grid" style="position:relative">
+    <kendo-grid  [class]="'flex-auto'" [selectedKeys]="viewModel.uiState.selectedIds" [kendoGridSelectBy]="'DLBH'" [kendoGridBinding]="viewModel.bindingData.list">
+      <kendo-grid-column field="DLMC" title="队列名称" width="10%"></kendo-grid-column>
+      <kendo-grid-column field="DLMS" title="队列描述" width="10%"></kendo-grid-column>
+      <kendo-grid-column field="MQFUQ" title="MQ服务器" width="10%"></kendo-grid-column>
+      <kendo-grid-column field="DLZT" title="队列状态" width="10%"></kendo-grid-column>
+      <kendo-grid-column field="isPreset" title="是否系统预置" width="10%"></kendo-grid-column>
+      <kendo-grid-column field="XXFX" title="消息方向" width="10%"></kendo-grid-column>
+      <kendo-grid-column field="XXMS" title="消息模式" width="15%"></kendo-grid-column>
+      <kendo-grid-column field="CJR" title="创建人" width="10%"></kendo-grid-column>
+      <kendo-grid-column field="CJSJ" title="创建时间" width="15%"></kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>

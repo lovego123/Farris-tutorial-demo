@@ -1,0 +1,106 @@
+<div class="d-flex g-main">
+  <div class="col">
+    <div class="d-flex flex-row  g-main px-2" style="overflow:hidden;">
+      <div class="col">
+        <div class="d-flex flex-column g-main">
+
+
+          <!--工具栏了 BEGIN-->
+          <div class="pt-2 mb-2">
+            <div class="row pt-2 mb-2">
+              <div class="col-sm-12 col-md-3 pt-2">
+                <h1 class="h4 d-inline-block">队列详细配置</h1>
+              </div>
+              <div class="col-sm-12 col-md-9">
+                <div class="pr-2 text-right">
+                  <button type="button" (click)="viewModel.save()" class="btn btn-sm btn-default">保存 </button>
+                  <button type="button" (click)="viewModel.close()" class="btn btn-sm btn-default mr-1">关闭</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--工具栏了 END-->
+
+          <div class="flex-auto" style="overflow-y:auto;" id="attachmentParent">
+            <!--表头 BEGIN-->
+            <kendo-tabstrip (tabSelect)="onTabSelect($event)">
+              <kendo-tabstrip-tab [title]="'队列信息'" [selected]="true">
+                <ng-template kendoTabContent>
+                  <form class="k-form p-2" [formGroup]="viewModel.form">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 pb-1">
+                        <label class="k-form-field">
+                          <span>队列名称
+                            <span class="k-required">*</span>
+                          </span>
+                          <div class="d-flex">
+                            <input formControlName="DLMC" class="k-textbox w-100" />
+                          </div>
+                        </label>
+                        <label class="k-form-field">
+                          <span>队列描述
+                            <span class="k-required">*</span>
+                          </span>
+                          <input formControlName="DLMS" class="k-textbox w-100" />
+                        </label>
+                      </div>
+                      <div class="col-sm-12 col-md-6 pb-1">
+                        <label class="k-form-field">
+                          <span>消息模式
+                            <span class="k-required">*</span>
+                          </span>
+                          <kendo-dropdownlist class=" w-100" formControlName="XXMS" [data]="['点到点(P2P)模型','发布/订阅(Pub/Sub)模型']"
+                            required></kendo-dropdownlist>
+                        </label>
+                        <label class="k-form-field">
+                          <span>消息方向
+                            <span class="k-required">*</span>
+                          </span>
+                          <kendo-dropdownlist class=" w-100" formControlName="XXFX" [data]="['双向','发送','接收']" required></kendo-dropdownlist>
+                        </label>
+                      </div>
+                      <div class="col-sm-12 col-md-6 pb-1">
+                        <label class="k-form-field">
+                          <span>MQ服务器
+                            <span class="k-required">*</span>
+                          </span>
+                          <kendo-dropdownlist class=" w-100" formControlName="MQFUQ" [data]="['默认服务器']" required></kendo-dropdownlist>
+                        </label>
+                      </div>
+
+                    </div>
+                  </form>
+                </ng-template>
+              </kendo-tabstrip-tab>
+            </kendo-tabstrip>
+            <!--表头 END-->
+
+            <!--表体 BEGIN-->
+            <ng-container>
+              <kendo-tabstrip>
+                <kendo-tabstrip-tab [title]="'任务信息'" [selected]="true">
+                  <ng-template kendoTabContent>
+                    <div class="w-100" style="overflow-x:auto;">
+                        TODO
+                    </div>
+                  </ng-template>
+                </kendo-tabstrip-tab>
+                <kendo-tabstrip-tab [title]="'执行通知'">
+                  <ng-template kendoTabContent>
+
+                    <div class="w-100" style="overflow-x:auto;">
+                      TODO
+                    </div>
+                  </ng-template>
+                </kendo-tabstrip-tab>
+              </kendo-tabstrip>
+            </ng-container>
+            <!--表体 END-->
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
