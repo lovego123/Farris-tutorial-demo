@@ -20,7 +20,8 @@
 
 
   <div class="kendo-grid" style="position:relative">
-    <kendo-grid  [class]="'flex-auto'" [selectedKeys]="viewModel.uiState.selectedIds" [kendoGridSelectBy]="'DLBH'" [kendoGridBinding]="viewModel.bindingData.list">
+    <kendo-grid  [class]="'flex-auto'" [selectedKeys]="viewModel.uiState.selectedIds" [kendoGridSelectBy]="'DLBH'" [kendoGridBinding]="viewModel.bindingData.list"
+    (dblclick)="viewModel.edit()">
       <kendo-grid-column field="DLMC" title="队列名称" width="10%"></kendo-grid-column>
       <kendo-grid-column field="DLMS" title="队列描述" width="10%"></kendo-grid-column>
       <kendo-grid-column field="MQFUQ" title="MQ服务器" width="10%"></kendo-grid-column>

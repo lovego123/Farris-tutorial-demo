@@ -9,7 +9,7 @@ import { MqueueConfigDetailUIState } from './mqueue-config-detail.uistate';
 @NgViewModel({
     children: [],
     binding: MqueueConfigDetailBindingData,
-    form: MqueueConfigDetailForm
+    form: MqueueConfigDetailForm,
 })
 export class MqueueConfigDetailViewModel extends ViewModel {
 
@@ -43,4 +43,27 @@ export class MqueueConfigDetailViewModel extends ViewModel {
         name: 'close'
     })
     public close() { }
+
+
+    /**
+     * 增加路由规则
+     */
+    @NgCommand({
+        name: 'addLYItem',
+        params: {
+            listPath: 'LY'
+        }
+    })
+    public addLYItem() { }
+
+    /**
+     * 删除路由规则
+     */
+    @NgCommand({
+        name: 'removeLYItem',
+        params: {
+            listPath: 'LY'
+        }
+    })
+    public removeLYItem() { }
 }

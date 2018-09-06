@@ -3,7 +3,7 @@ import { MqueueConfigDetailDataService } from './mqueue-config-detail.dataservic
 import { MqueueConfigDetailDataStorage } from './mqueue-config-detail.datastorage';
 import { MqueueConfigDetailRepository } from './mqueue-config-detail.repository';
 import { QDetailEntity } from './entities/queue-detail';
-
+import { RouteInfoEntity } from './entities/route-info';
 
 const DOMAIN_PROVIDERS: Provider[] = [
     MqueueConfigDetailDataService,
@@ -11,8 +11,9 @@ const DOMAIN_PROVIDERS: Provider[] = [
     MqueueConfigDetailRepository,
 ];
 
-export{
+export {
     QDetailEntity,
+    RouteInfoEntity,
     MqueueConfigDetailDataService,
     MqueueConfigDetailDataStorage,
     MqueueConfigDetailRepository,

@@ -19,7 +19,6 @@ export class MqueueConfigDetailComponent implements OnInit {
       this.viewModel.uiState.dataId = params.get('id');
       this.viewModel.uiState.action = params.get('action');
       this.viewModel.formLoad();
-      console.log(this.viewModel.bindingData);
     });
   }
 

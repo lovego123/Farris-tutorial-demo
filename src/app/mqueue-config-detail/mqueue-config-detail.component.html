@@ -46,6 +46,20 @@
                       </div>
                       <div class="col-sm-12 col-md-6 pb-1">
                         <label class="k-form-field">
+                          <span>服务单元
+                          </span>
+                          <div class="d-flex">
+                            <input formControlName="FWDY" class="k-textbox w-100" />
+                          </div>
+                        </label>
+                        <label class="k-form-field">
+                          <span>功能模块
+                          </span>
+                          <input formControlName="GNMK" class="k-textbox w-100" />
+                        </label>
+                      </div>
+                      <div class="col-sm-12 col-md-6 pb-1">
+                        <label class="k-form-field">
                           <span>消息模式
                             <span class="k-required">*</span>
                           </span>
@@ -66,6 +80,11 @@
                           </span>
                           <kendo-dropdownlist class=" w-100" formControlName="MQFUQ" [data]="['默认服务器']" required></kendo-dropdownlist>
                         </label>
+                        <label class="k-form-field">
+                          <span>执行类别
+                          </span>
+                          <kendo-dropdownlist class=" w-100" formControlName="ZXLB" [data]="['异步','同步']"></kendo-dropdownlist>
+                        </label>
                       </div>
 
                     </div>
@@ -81,15 +100,192 @@
                 <kendo-tabstrip-tab [title]="'任务信息'" [selected]="true">
                   <ng-template kendoTabContent>
                     <div class="w-100" style="overflow-x:auto;">
-                        TODO
+                      <input type="radio" value="procedure" [(ngModel)]="viewModel.uiState.fileType" name="radio-group" id="radio1" class="k-radio"
+                        checked />
+                      <label class="k-radio-label" for="radio1">程序集</label>
+                      <input type="radio" value="component" [(ngModel)]="viewModel.uiState.fileType" name="radio-group" id="radio2" class="k-radio" />
+                      <label class="k-radio-label" for="radio2">构件</label>
+                      <form class="k-form p-2" [formGroup]="viewModel.form.WJForm">
+                        <fieldset class="k-fieldset">
+                          <div class="row">
+                            <div class="col-sm-6 col-md-5 pb-1">
+                              <label class="k-form-field">
+                                <span>程序集名称
+                                  <span class="k-required">* </span>
+                                </span>
+                                <input formControlName="CXJMC" [readonly]="viewModel.uiState.fileType!=='procedure'" class="k-textbox" 
+                                id="textfield1" placeholder="请选择文件"/>
+                              </label>
+                            </div>
+                            <div class="col-sm-3 col-md-1 pb-1">
+                              <label class="k-form-field">
+                                <br> <span> </span>
+                                <input type='button' [disabled]="viewModel.uiState.fileType!=='procedure'" class='btn btn-sm btn-default'
+                                  value='浏览...' onclick="document.getElementById('fileField1').click()" />
+                                <input hidden="true" type="file" id="fileField1" class="file" accept=".dll" onchange="textfield1.value=this.value"
+                                  formControlName="myfile1" />
+                                <!--由于file类型的input无法直接绑定formControl，因此此次formControlName="myfile1"用于转接 -->
+                              </label>
+                            </div>
+                            <div class="col-sm-6 col-md-5 pb-1">
+                              <label class="k-form-field">
+                                <span>构件
+                                  <span class="k-required">* </span>
+                                </span>
+                                <input formControlName="GJMC" [readonly]="viewModel.uiState.fileType!=='component'" class="k-textbox" type='text'
+                                  id='textfield' placeholder="请选择文件"/>
+                              </label>
+                            </div>
+                            <div class="col-sm-3 col-md-1 pb-1">
+                              <label class="k-form-field">
+                                <br> <span> </span>
+                                <input type='button' [disabled]="viewModel.uiState.fileType!=='component'" class='btn btn-sm btn-default'
+                                  value='浏览...' onclick="document.getElementById('fileField').click()" />
+                                <input hidden="true" type="file" id="fileField" class="file" onchange="textfield.value=this.value"
+                                  formControlName="myfile2" />
+                              </label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 pb-1">
+                              <label class="k-form-field">
+                                <span>类名称
+                                </span>
+                                <input formControlName="LMC" [readonly]="viewModel.uiState.fileType!=='procedure'" class="k-textbox w-100"
+                                  placeholder="暂时只支持手动输入" />
+                              </label>
+                              <label class="k-form-field">
+                                <span>方法名称
+                                </span>
+                                <input formControlName="FFMC" [readonly]="viewModel.uiState.fileType!=='procedure'" class="k-textbox w-100"
+                                  placeholder="暂时只支持手动输入" />
+                              </label>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </form>
                     </div>
                   </ng-template>
                 </kendo-tabstrip-tab>
-                <kendo-tabstrip-tab [title]="'执行通知'">
+                <kendo-tabstrip-tab [title]="'异常策略'">
                   <ng-template kendoTabContent>
-
                     <div class="w-100" style="overflow-x:auto;">
-                      TODO
+                      <div class="row example-wrapper">
+                        <div class="col-xs-12 col-sm-6 example-col pt-2">
+                          <input type="checkbox" id="ch1" class="k-checkbox" [(ngModel)]="viewModel.uiState.isRepeat" checked>
+                          <label class="k-checkbox-label" for="ch1">是否重试</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 example-col">
+                          <span>重试<kendo-numerictextbox [disabled]="!viewModel.uiState.isRepeat" [format]="'n0'" [autoCorrect]="true"
+                              [max]="100" [min]="1" [(ngModel)]="viewModel.uiState.repeatTimes"></kendo-numerictextbox> 次后，执行以下补偿策略</span>
+                        </div>
+                      </div>
+                      <fieldset class="k-fieldset">
+                        <div class="row example-wrapper">
+                          <div class="col-xs-6 col-sm-3 example-col">
+                            <input type="radio" value="pass" [(ngModel)]="viewModel.uiState.compensateStrategy" name="radio-group1" id="radio11"
+                            class="k-radio" />
+                            <label class="k-radio-label" for="radio11">跳过</label>
+                          </div>
+                          <div class="col-xs-6 col-sm-3 example-col">
+                            <input type="radio" value="requeue" [(ngModel)]="viewModel.uiState.compensateStrategy" name="radio-group1" id="radio12"
+                            class="k-radio" />
+                            <label class="k-radio-label" for="radio12">重新入队</label>
+                          </div>
+                          <div class="col-xs-6 col-sm-3 example-col">
+                            <input type="radio" value="compensate" [(ngModel)]="viewModel.uiState.compensateStrategy" name="radio-group1" id="radio13"
+                            class="k-radio" />
+                            <label class="k-radio-label" for="radio13">异常补偿</label>
+                          </div>
+                        </div>
+                        <div class="row example-wrapper">
+                          <div class="col-xs-6 col-sm-3 example-col">
+                            <input type="radio" [disabled]="viewModel.uiState.compensateStrategy!=='compensate'" value="procedure" [(ngModel)]="viewModel.uiState.bcfileType"
+                            id="radio21" class="k-radio" />
+                            <label class="k-radio-label" for="radio21">程序集</label>
+                          </div>
+                          <div class="col-xs-6 col-sm-3 example-col">
+                            <input type="radio" [disabled]="viewModel.uiState.compensateStrategy!=='compensate'" value="component" [(ngModel)]="viewModel.uiState.bcfileType"
+                            id="radio22" class="k-radio" />
+                            <label class="k-radio-label" for="radio22">构件</label>
+                          </div>
+                        </div>
+                        <form class="k-form p-2" [formGroup]="viewModel.form.BCWJForm">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-5 pb-1">
+                                  <label class="k-form-field">
+                                    <span>程序集名称
+                                    </span>
+                                    <input formControlName="BCCXJMC" [readonly]="viewModel.uiState.compensateStrategy!=='compensate' || viewModel.uiState.bcfileType!=='procedure'" class="k-textbox"
+                                     id="textfield2" placeholder="请选择文件"/>
+                                  </label>
+                                </div>
+                                <div class="col-sm-3 col-md-1 pb-1">
+                                  <label class="k-form-field">
+                                    <br> <span> </span>
+                                    <input type='button' [disabled]="viewModel.uiState.compensateStrategy!=='compensate' || viewModel.uiState.bcfileType!=='procedure'" class='btn btn-sm btn-default'
+                                      value='浏览...' onclick="document.getElementById('fileField2').click()" />
+                                    <input hidden="true" type="file" id="fileField2" class="file" accept=".dll" onchange="textfield2.value=this.value"
+                                      formControlName="myfile1" />
+                                    <!--由于file类型的input无法直接绑定formControl，因此此次formControlName="myfile1"用于转接 -->
+                                  </label>
+                                </div>
+                                <div class="col-sm-6 col-md-5 pb-1">
+                                  <label class="k-form-field">
+                                    <span>构件
+                                    </span>
+                                    <input formControlName="BCGJMC" [readonly]="viewModel.uiState.compensateStrategy!=='compensate' || viewModel.uiState.bcfileType!=='component'" class="k-textbox" type='text'
+                                      id='textfield3' placeholder="请选择文件" />
+                                  </label>
+                                </div>
+                                <div class="col-sm-3 col-md-1 pb-1">
+                                  <label class="k-form-field">
+                                    <br> <span> </span>
+                                    <input type='button' [disabled]="viewModel.uiState.compensateStrategy!=='compensate' || viewModel.uiState.bcfileType!=='component'" class='btn btn-sm btn-default'
+                                      value='浏览...' onclick="document.getElementById('fileField3').click()" />
+                                    <input hidden="true" type="file" id="fileField3" class="file" onchange="textfield3.value=this.value"
+                                      formControlName="myfile2" />
+                                  </label>
+                                </div>
+                                <div class="col-sm-12 col-md-6 pb-1">
+                                  <label class="k-form-field">
+                                    <span>类名称
+                                    </span>
+                                    <input formControlName="BCLMC" [readonly]="viewModel.uiState.compensateStrategy!=='compensate' || viewModel.uiState.bcfileType!=='procedure'" class="k-textbox w-100"
+                                      placeholder="暂时只支持手动输入" />
+                                  </label>
+                                  <label class="k-form-field">
+                                    <span>方法名称
+                                    </span>
+                                    <input formControlName="BCFFMC" [readonly]="viewModel.uiState.compensateStrategy!=='compensate' || viewModel.uiState.bcfileType!=='procedure'" class="k-textbox w-100"
+                                      placeholder="暂时只支持手动输入" />
+                                  </label>
+                                </div>
+                              </div>
+                          </form>
+                        </fieldset>
+                    </div>
+                  </ng-template>
+                </kendo-tabstrip-tab>
+                <kendo-tabstrip-tab [title]="'路由规则'">
+                  <ng-template kendoTabContent>
+                    <div class="sub-grid-toolbar mx-0 mb-2">
+                      <ul class="sgt-menu-bar clearfix m-0 p-0">
+                        <li class="sgt-menu-item" style="padding: 0;">
+                          <button type="button" (click)="viewModel.addLYItem()" class="btn btn-link btn-sm item-text"
+                            style="color: #656565;" (click)="viewModel.addWlItem()">新增</button>
+                        </li>
+                        <li class="sgt-menu-item" style="padding: 0;">
+                          <button type="button" (click)="viewModel.removeLYItem()" class="btn btn-link btn-sm item-text"
+                            style="color: #656565;" (click)="viewModel.removeWlItem()">删除</button>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="w-100" style="overflow-x:auto;">
+                      <kendo-grid [class]="'flex-auto'" [selectable]="true" [kendoGridSelectBy]="'LYNM'"
+                        [kendoGridBinding]="viewModel.bindingData.LY" [form]="viewModel.form.LYForm" [editable]="true">
+                        <kendo-grid-column field="LYBH" title="编号" width="20%"></kendo-grid-column>
+                        <kendo-grid-column field="LYWD" title="路由维度" width="40%"></kendo-grid-column>
+                        <kendo-grid-column field="LYWDZ" title="路由维度值" width="40%"></kendo-grid-column>
+                      </kendo-grid>
                     </div>
                   </ng-template>
                 </kendo-tabstrip-tab>

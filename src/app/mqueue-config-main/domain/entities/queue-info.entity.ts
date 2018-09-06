@@ -65,4 +65,6 @@ export class QueueEntity extends Entity {
     @NgField()
     CJSJ: string;
 
+
+
 }

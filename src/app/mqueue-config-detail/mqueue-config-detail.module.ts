@@ -11,8 +11,10 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { KendoBindingModule } from '@farris/kendo-binding';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { SwitchModule} from '@progress/kendo-angular-inputs';
 import { HttpModule } from '@angular/http';
 import { UploadModule } from '@progress/kendo-angular-upload';
+import { InputsModule } from '@progress/kendo-angular-inputs';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { UploadModule } from '@progress/kendo-angular-upload';
     DropDownsModule,
     HttpModule,
     UploadModule,
+    SwitchModule,
+    InputsModule,
 
     MqueueConfigDetailRoutingModule,
     CommandModule.setup(commandHandlers, [])

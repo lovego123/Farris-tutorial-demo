@@ -12,7 +12,7 @@ export class FormLoadHandler extends CommandHandler {
 
     constructor(
         private dataService: MqueueConfigDetailDataService,
-        private uiState: MqueueConfigDetailUIState
+        private uiState: MqueueConfigDetailUIState,
     ) {
         super();
     }
@@ -26,5 +26,6 @@ export class FormLoadHandler extends CommandHandler {
                 this.dataService.loadData(dataId);
             }
         });
+
     }
 }
